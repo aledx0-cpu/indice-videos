@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kobayashi-san chi no Maid Dragon</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --indigo-900:#1a237e;
+      --indigo-700:#303f9f;
+      --indigo-500:#3f51b5;
+      --indigo-300:#7986cb;
+      --indigo-100:#c5cae9;
+      --dark-bg:#0a0a1a;
+      --text-light:#ffffff;
+      --text-muted:#b0b0b0;
+      --shadow-dark:rgba(0,0,0,0.5);
+    }
+
+    body{
+      background:var(--dark-bg);
+      color:var(--text-light);
+      font-family:'Poppins',sans-serif;
+      margin:0;
+      padding-bottom:80px;
+    }
+
+    /* === CABECERA / FONDO === */
+    .background-image{
+      position:relative;
+      z-index:0;
+      width:100%;
+      height:260px;
+      background-size:cover;
+      background-position:top center;
+      border-bottom:2px solid var(--indigo-700);
+    }
+    .background-overlay{
+      position:absolute;
+      z-index:1;
+      inset:0;
+      background:linear-gradient(to bottom, rgba(10,10,26,0.15), rgba(10,10,26,0.9));
+    }
+
+    /* === POSTER PEQUEÑO + INFO === */
+    .poster{
+      position:relative;
+      z-index:2;
+      width:120px;
+      height:180px;
+      object-fit:cover;
+      border-radius:10px;
+      border:2px solid rgba(121,134,203,0.3);
+      box-shadow:0 5px 15px var(--shadow-dark);
+      margin-top:-70px;
+      margin-left:15px;
+      background:#111;
+    }
+    .info{
+      position:relative;
+      z-index:2;
+      margin-left:150px;
+      margin-top:-120px;
+    }
+    .info h1{
+      font-size:1.4rem;
+      margin-bottom:8px;
+    }
+    .tags span{
+      display:inline-block;
+      background:var(--indigo-700);
+      color:#fff;
+      font-size:.75rem;
+      padding:3px 8px;
+      border-radius:12px;
+      margin-right:5px;
+      margin-bottom:5px;
+    }
+
+    /* === ACCIONES === */
+    .actions{
+      display:flex;
+      justify-content:space-around;
+      margin:20px 0;
+      text-align:center;
+    }
+    .actions .action{
+      flex:1;
+      cursor:pointer;
+      color:var(--text-muted);
+      transition:.25s;
+      user-select:none;
+    }
+    .actions .action:hover{ color:var(--indigo-300); }
+    .actions #favorite-btn.active{
+      color:var(--indigo-500)!important;
+      text-shadow:0 0 10px rgba(63,81,181,0.6);
+    }
+
+    /* === SINOPSIS === */
+    .synopsis{
+      padding:0 15px;
+      font-size:.9rem;
+      line-height:1.5;
+      color:var(--text-muted);
+    }
+
+    /* === CAPÍTULOS === */
+    .chapters{ margin:20px 15px; }
+    .chapter-card{
+      display:flex;
+      align-items:center;
+      background:#161632;
+      margin-bottom:10px;
+      border-radius:10px;
+      overflow:hidden;
+      box-shadow:0 4px 10px var(--shadow-dark);
+      border:1px solid rgba(121,134,203,0.2);
+    }
+    .chapter-card img{
+      width:100px;
+      height:70px;
+      object-fit:cover;
+    }
+    .chapter-card div{
+      padding:10px;
+      font-size:.85rem;
+      flex:1;
+    }
+
+    /* === MODAL COMENTARIOS === */
+    .modal{
+      display:none;
+      position:fixed;
+      z-index:2000;
+      inset:0;
+      background:rgba(0,0,0,0.8);
+      justify-content:center;
+      align-items:center;
+    }
+    .modal-content{
+      background:#1c1c2c;
+      padding:20px;
+      border-radius:10px;
+      width:90%;
+      max-width:420px;
+    }
+    .modal-content textarea{
+      width:100%;
+      height:100px;
+      background:#0a0a1a;
+      color:#fff;
+      border:1px solid var(--indigo-500);
+      border-radius:8px;
+      padding:8px;
+      resize:none;
+    }
+    .modal-content button{
+      margin-top:10px;
+      background:var(--indigo-500);
+      border:none;
+      color:#fff;
+      padding:6px 12px;
+      border-radius:6px;
+      cursor:pointer;
+    }
+
+    @media (max-width:480px){
+      .poster{ width:105px; height:158px; margin-top:-64px; }
+      .info{ margin-left:135px; margin-top:-110px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Fondo -->
+  <div class="background-image"
+       style="background-image:url('https://cdn.somoskudasai.com/image/d8a54efbb696a509d31c7af4ae5c58bb/1280x720/kudasai-maidragon-652.webp');">
+    <div class="background-overlay"></div>
+  </div>
+
+  <!-- Poster pequeño + info -->
+  <img class="poster"
+       src="https://cdn.somoskudasai.com/image/d8a54efbb696a509d31c7af4ae5c58bb/1280x720/kudasai-maidragon-652.webp"
+       alt="Poster">
+  <div class="info">
+    <h1>Kobayashi-san Chi no Maid Dragon</h1>
+    <p><span class="badge bg-primary">2017</span> • <span class="badge bg-success">Finalizado</span></p>
+    <p><i class="fas fa-star"></i> 5.0   <i class="fas fa-eye"></i> 9.2K</p>
+    <div class="tags"><span>Animación</span><span>Comedia</span></div>
+  </div>
+
+  <!-- Acciones -->
+  <div class="actions">
+    <div id="favorite-btn" class="action"><i class="fas fa-heart"></i><br>Favoritos</div>
+    <div id="share-btn" class="action"><i class="fas fa-share-alt"></i><br>Compartir</div>
+    <div id="comment-btn" class="action"><i class="fas fa-comment"></i><br>Comentarios</div>
+  </div>
+
+  <!-- Sinopsis -->
+  <div class="synopsis">
+    <p id="synopsis-text">Kobayashi vive sola en un apartamento, hasta que un día, Tooru aparece en su vida y terminan viviendo juntas. Tooru mira con desprecio a los humanos, pero después de ser salvada por Kobayashi, decide devolver el favor ayudándola en todo tipo de cosas.</p>
+  </div>
+
+  <!-- Capítulos -->
+  <div class="chapters">
+    <h5>Capítulos</h5>
+    <div id="chapters-list"></div>
+  </div>
+
+  <!-- Modal de comentarios -->
+  <div class="modal" id="comment-modal">
+    <div class="modal-content">
+      <h5>Escribir comentario</h5>
+      <textarea id="comment-input" placeholder="Escribe aquí..."></textarea>
+      <button onclick="saveComment()">Guardar</button>
+      <button onclick="closeModal()">Cerrar</button>
+    </div>
+  </div>
+
+<script>
+  /* ====== DATOS DEMO ====== */
+  const MOVIE_ID = "kobayashi-s1";
+  const chapters = [
+    { title:"T1 - E1: Episodio 1", img:"https://i.imgur.com/ZXBtVw7.jpg" },
+    { title:"T1 - E2: Episodio 2", img:"https://i.imgur.com/ZXBtVw7.jpg" },
+    { title:"T1 - E3: Episodio 3", img:"https://i.imgur.com/ZXBtVw7.jpg" }
+  ];
+
+  /* ====== CAPÍTULOS ====== */
+  const chapterList = document.getElementById("chapters-list");
+  chapters.forEach(ch=>{
+    const card = document.createElement("div");
+    card.className = "chapter-card";
+    card.innerHTML = `<img src="${ch.img}" alt=""><div>${ch.title}</div>`;
+    chapterList.appendChild(card);
+  });
+
+  /* ====== FAVORITOS ====== */
+  const favoriteBtn = document.getElementById("favorite-btn");
+
+  function setFavUI(active){
+    favoriteBtn.classList.toggle("active", active);
+  }
+
+  function getFavState(){
+    return localStorage.getItem("fav:"+MOVIE_ID) === "1";
+  }
+
+  function setFavState(active){
+    if(active){ localStorage.setItem("fav:"+MOVIE_ID, "1"); }
+    else{ localStorage.removeItem("fav:"+MOVIE_ID); }
+  }
+
+  setFavUI(getFavState());
+
+  favoriteBtn.onclick = ()=>{
+    const nowActive = !getFavState();
+    setFavState(nowActive);
+    setFavUI(nowActive);
+    alert(nowActive ? "Agregado a favoritos" : "Eliminado de favoritos");
+  };
+
+  /* ====== COMPARTIR ====== */
+  document.getElementById("share-btn").onclick = ()=>{
+    if(navigator.share){
+      navigator.share({ title:"Kobayashi-san", text:"Mira esta serie", url:location.href });
+    }else{
+      navigator.clipboard.writeText(location.href);
+      alert("Link copiado al portapapeles");
+    }
+  };
+
+  /* ====== COMENTARIOS ====== */
+  const commentModal = document.getElementById("comment-modal");
+  document.getElementById("comment-btn").onclick = ()=> commentModal.style.display = "flex";
+  function closeModal(){ commentModal.style.display = "none"; }
+  function saveComment(){
+    const val = document.getElementById("comment-input").value.trim();
+    if(val){
+      alert("Comentario guardado: " + val);
+      document.getElementById("comment-input").value = "";
+      closeModal();
+    }
+  }
+  window.closeModal = closeModal;
+</script>
+</body>
+</html>
